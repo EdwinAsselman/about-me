@@ -1,5 +1,10 @@
 <div>
-    <table class="text-center m-4">
+    <div class="flex">
+        <x-input name="search" wire:model="search" class="mt-1 block bg-gray-200 p-2" placeholder="Search..." />
+        <span class="italic text-sm text-gray-600 pt-6 px-2" wire:loading>Loading results...</span>
+    </div>
+
+    <table class="text-center m-4 w-full" wire:loading.class="opacity-70">
         <thead>
             <tr>
                 <th class="px-4 py-2">Name</th>
@@ -12,7 +17,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($users as $user)
+            @forelse($users as $user)
                 <tr>
                     <td>
                         <div class="shrink-0 mr-3">
@@ -39,7 +44,11 @@
                         @endif
                     </td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="7" class="text-gray-600 py-8">No users where found...</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 </div>
