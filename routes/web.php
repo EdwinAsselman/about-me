@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Users\UsersController;
+use App\Http\Controllers\Users\UserDetailsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,12 +19,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
+Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified' ])->group(function () {
+    
+    // Dashboard.
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    // Display all users of the application.
+    Route::get('/users', [ UsersController::class, 'render' ])
+        ->name('users');
+
+    Route::get('/users/{userId}', [ UserDetailsController::class, 'render' ])
+        ->name('users.user');
 });

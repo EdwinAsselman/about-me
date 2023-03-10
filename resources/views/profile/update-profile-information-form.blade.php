@@ -53,14 +53,20 @@
         @endif
 
         <!-- Name -->
-        <div class="col-span-6 sm:col-span-4">
+        <div class="col-span-4 sm:col-start-1 sm:col-end-3">
             <x-label for="name" value="{{ __('Name') }}" />
             <x-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="state.name" autocomplete="name" />
             <x-input-error for="name" class="mt-2" />
         </div>
 
+        <!-- Age -->
+        <div class="col-span-4 sm:col-start-3 sm:col-end-5">
+            <x-label for="age" value="{{ __('Age') }}" />
+            <x-input id="age" type="number" class="mt-1 block w-full" wire:model.defer="state.age" autocomplete="age" />
+        </div>
+
         <!-- Email -->
-        <div class="col-span-6 sm:col-span-4">
+        <div class="col-span-4 sm:col-span-4">
             <x-label for="email" value="{{ __('Email') }}" />
             <x-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" autocomplete="username" />
             <x-input-error for="email" class="mt-2" />
@@ -80,6 +86,43 @@
                     </p>
                 @endif
             @endif
+        </div>
+
+        <!-- Gender -->
+        <div class="col-span-4 sm:col-start-1 sm:col-end-2">
+            <x-label for="gender" value="{{ __('Gender') }}" />
+            <select id="gender" type="dropdown" class="mt-1 block w-full" wire:model.defer="state.gender" autocomplete="gender">
+                <option value="" disabled>Select a gender...</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+        
+        <!-- Residence -->
+        <div class="col-span-4 sm:col-start-2 sm:col-end-5">
+            <x-label for="residence" value="{{ __('Residence') }}" />
+            <x-input id="residence" type="text" class="mt-1 block w-full" wire:model.defer="state.residence" autocomplete="residence" />
+        </div>
+
+        <!-- Job -->
+        <div class="col-span-4 sm:col-start-1 sm:col-end-5">
+            <x-label for="job" value="{{ __('Job') }}" />
+            <x-input id="job" type="text" class="mt-1 block w-full" wire:model.defer="state.job" autocomplete="job" />
+        </div>
+
+        <!-- Website -->
+        <div class="col-span-4 sm:col-start-1 sm:col-end-5">
+            <x-label for="website" value="{{ __('Website') }}" />
+            <x-input id="website" type="url" class="mt-1 block w-full" wire:model.defer="state.website" autocomplete="website" />
+            <x-input-error for="website" class="mt-2" />
+        </div>
+
+        <!-- About me -->
+        <div class="col-span-4 sm:col-start-1 sm:col-end-5">
+            <x-label for="about_me" value="{{ __('About me') }}" />
+            <x-textarea rows="4" id="about_me" type="url" class="mt-1 block w-full" wire:model.defer="state.about_me" autocomplete="about_me" />
+            <x-input-error for="about_me" class="mt-2" />
         </div>
     </x-slot>
 
