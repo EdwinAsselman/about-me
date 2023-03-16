@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Users\UsersController;
 use App\Http\Controllers\Users\UserDetailsController;
 use Illuminate\Support\Facades\Route;
@@ -14,22 +15,19 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified' ])->group(function () {
     
-    // Dashboard.
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+// Main page of the application.
+Route::get('/', [ HomeController::class, 'render' ])
+    ->name('home');
+
+// USERS
+Route::prefix('users')->group(function() {
 
     // Display all users of the application.
-    Route::get('/users', [ UsersController::class, 'render' ])
+    Route::get('/', [ UsersController::class, 'render' ])
         ->name('users');
 
-    Route::get('/users/{userId}', [ UserDetailsController::class, 'render' ])
+    // Display user details.
+    Route::get('/{userId}', [ UserDetailsController::class, 'render' ])
         ->name('users.user');
 });

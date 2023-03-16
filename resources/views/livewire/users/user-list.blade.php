@@ -1,6 +1,6 @@
 <div>
     <div class="flex">
-        <x-input name="search" wire:model="search" class="mt-1 block bg-gray-200 p-2" placeholder="Search..." />
+        <x-input name="search" wire:model="search" class="block bg-gray-200 p-2 m-1" placeholder="Search..." />
         <span class="italic text-sm text-gray-600 pt-6 px-2" wire:loading>Loading results...</span>
     </div>
 
@@ -24,7 +24,10 @@
                             <a href="{{ route('users.user', [ 'userId' => $user->id ]) }}" class="flex">
                                 <img class="h-10 w-10 rounded-full object-cover" src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}" />
                                 <span class="py-2 px-2 text-blue-400 font-semibold capitalize">
-                                    {{ $user->name }} {{ Auth::user()->name == $user->name ? "(You)" : null }}
+                                    {{ $user->name }}
+                                    @auth
+                                        {{ Auth::user()->name == $user->name ? "(You)" : null }}
+                                    @endauth
                                 </span>
                             </a>
                         </div>
@@ -37,11 +40,13 @@
                         <a class="text-blue-400 font-semibold capitalize" href="{{ $user->website }}" target="_blank">{{ Str::remove('https://www.', $user->website) }}</a>
                     </td>
                     <td class="px-4 py-5 capitalize">
-                        @if(Auth::user()->name == $user->name)
-                            <a href="/user/profile">
-                                <x-button>Edit profile</x-button>
-                            </a>
-                        @endif
+                        @auth
+                            @if(Auth::user()->id == $user->id)
+                                <a href="/user/profile">
+                                    <x-button>Edit profile</x-button>
+                                </a>
+                            @endif
+                        @endauth
                     </td>
                 </tr>
             @empty

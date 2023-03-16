@@ -58,4 +58,27 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /**
+     * Get the greet according to the current hour of the day.
+     * 
+     * @return string
+     */
+    public function greet()
+    {   
+        if (date('H') < 12)
+        {
+            $greet = "Good morning";
+        }
+        elseif (date('H') < 19)
+        {
+            $greet = "Good afternoon";
+        }
+        else
+        {
+            "Good evening";
+        }
+
+        return $greet . ', ' . $this->name . '!';
+    }
 }
