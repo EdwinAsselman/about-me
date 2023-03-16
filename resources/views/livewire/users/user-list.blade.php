@@ -1,7 +1,6 @@
 <div>
     <div class="flex place-content-between">
         <x-input name="search" wire:model="search" class="block bg-gray-200 p-2 m-1" placeholder="Search..." />
-        <span class="italic text-sm text-gray-600 pt-6 px-2" wire:loading>Loading results...</span>
         <div>
             <span class="text-gray-500">Show users per page:</span>
             <select class="border-gray-400" name="perPage" wire:model="perPage">
