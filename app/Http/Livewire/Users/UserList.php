@@ -3,12 +3,15 @@
 namespace App\Http\Livewire\Users;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class UserList extends Component
 {   
     // properties
     public $search;
+    public $perPage = 10;
 
     /**
      * Return the Livewire view with all users.
@@ -32,7 +35,9 @@ class UserList extends Component
     {
         $users = User::where('name', 'like', '%'.$this->search.'%')
             ->orWhere('residence', 'like', '%'.$this->search.'%')
-            ->orWhere('job', 'like', '%'.$this->search.'%')->get();
+            ->orWhere('job', 'like', '%'.$this->search.'%')
+            ->orderBy('name')
+            ->paginate($this->perPage);
 
         return $users;
     }

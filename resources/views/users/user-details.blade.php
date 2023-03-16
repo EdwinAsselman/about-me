@@ -19,7 +19,9 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">  
+            <x-breadcrumbs root="home" child="users" page="{{ $user->name }}"></x-breadcrumbs>
+        
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4">
                 @livewire('users.user-details', [ 'user' => $user ])
             </div>
