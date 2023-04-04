@@ -9,6 +9,8 @@ use Livewire\WithPagination;
 
 class UserList extends Component
 {   
+    use WithPagination;
+
     // properties
     public $search;
     public $perPage = 10;
@@ -24,6 +26,16 @@ class UserList extends Component
 
         return view('livewire.users.user-list')
             ->with('users', $users);
+    }
+
+    /**
+     * Reset the users page back to the first page, when using the search bar.
+     * 
+     * @return void
+     */
+    public function updatedSearch()
+    {
+        $this->resetPage();
     }
 
     /**
